@@ -12,7 +12,7 @@ const emit = defineEmits<{
   <div class="contact-list">
     <h3>联系人</h3>
     <ul>
-      <li v-for="contact in contacts" :key="contact" @click="$emit('select-contact', contact)">
+      <li v-for="contact in contacts" :key="contact" @click="emit('select-contact', contact)">
         {{ contact }}
       </li>
     </ul>

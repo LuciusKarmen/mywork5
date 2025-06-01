@@ -1,13 +1,18 @@
+<script setup lang="ts">
+import ChatWindow from '../src/components/ChatWindow.vue'
+</script>
+
 <template>
   <div id="app">
-    <h1>QQ 聊天系统</h1>
-    <ChatWindow :current-user="currentUser" />
+    <h1>💬 简易聊天系统</h1>
+    <ChatWindow current-user="UserA" />
   </div>
 </template>
 
-<script setup lang="ts">
-import ChatWindow from './components/ChatWindow.vue'
-import { ref } from 'vue'
-
-const currentUser = ref('testUser')
-</script>
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+</style>

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import type { ChatMessageDTO } from '../types/types'
 
 const apiClient = axios.create({
   baseURL: 'http://localhost:8080/api/messages',

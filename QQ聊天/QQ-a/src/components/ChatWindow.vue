@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import MessageList from './MessageList.vue'
 import ContactList from './ContactList.vue'
 import { getMessages as fetchMessages, sendMessage as sendApiMessage } from '@/services/chatService'
-import { ChatMessage, ChatMessageDTO } from '@/types'
+import type { ChatMessage, ChatMessageDTO } from '../types/types'
 
 const props = defineProps<{
   currentUser: string
