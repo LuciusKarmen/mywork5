@@ -4,19 +4,16 @@ const apiClient = axios.create({
   baseURL: 'http://localhost:8080/api/messages',
 })
 
-export const getMessages = async (currentUser: string, withUser: string) => {
-  const response = await apiClient.get('', {
-    params: { withUser },
-    headers: { 'X-User-Id': currentUser },
+// 获取两个用户之间的消息
+export const getMessages = async (user1: string, user2: string) => {
+  const res = await apiClient.get('', {
+    params: { user1, user2 },
   })
-  return response.data
+  return res.data
 }
 
-export const sendMessage = async (currentUser: string, recipient: string, content: string) => {
-  const response = await apiClient.post(
-    '',
-    { content, recipient },
-    { headers: { 'X-User-Id': currentUser } },
-  )
-  return response.data
+// 发送消息
+export const sendMessage = async (message: ChatMessageDTO) => {
+  const res = await apiClient.post('', message)
+  return res.data
 }
