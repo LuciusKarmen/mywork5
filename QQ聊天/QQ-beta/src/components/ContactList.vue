@@ -14,7 +14,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="ContactList">
+
 defineProps<{
   contacts: string[];
   selectedContact: string | null;
@@ -23,4 +24,12 @@ defineProps<{
 defineEmits<{
   (e: 'select-contact', contact: string): void;
 }>();
+
+function defineProps<T>() {
+  throw new Error('Function not implemented.');
+}
+
+function defineEmits<T>() {
+  throw new Error('Function not implemented.');
+}
 </script>

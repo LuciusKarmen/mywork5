@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="MessageList">
 defineProps<{
   messages: Array<{
     content: string;
@@ -26,4 +26,8 @@ const formatTime = (timestamp: Date | undefined): string => {
   if (!timestamp) return '';
   return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 };
+
+function defineProps<T>() {
+  throw new Error("Function not implemented.");
+}
 </script>

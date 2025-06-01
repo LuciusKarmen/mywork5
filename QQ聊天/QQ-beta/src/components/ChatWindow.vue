@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="ChatWindow">
 import { ref, onMounted } from 'vue';
 import { getMessages as fetchMessages, sendMessage as sendApiMessage } from '@/services/chatService';
 import MessageList from './MessageList.vue';
