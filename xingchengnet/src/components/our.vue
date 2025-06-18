@@ -38,10 +38,11 @@
 
 <style scoped lang="scss">
 .about-container {
-  position: relative;
-  height: 110vh;
+position: relative;
+  min-height: 100vh;
   width: 100%;
   background-image: url('../pic/R-C.jpg');
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   display: flex;
