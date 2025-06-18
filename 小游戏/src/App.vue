@@ -6,16 +6,16 @@
 </template>
 
 <script setup lang="ts" name="App">
-import SandBallGame from './components/SandBallGame.vue'
+import SandBallGame from '../src/components/SandBallGame.vue';
 </script>
 
 <style scoped lang="scss">
-
+@use './index.css' as *;
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   color: #2c3e50;
   margin-top: 20px;
 }
-@use './index.css'
+
 </style>

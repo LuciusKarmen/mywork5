@@ -1,7 +1,14 @@
 <template>
-  <div class="game-container" @touchstart="handleTouchStart" @touchmove="handleTouchMove">
+  <div class="game-container">
+    <!-- 左右控制按钮 -->
+    <button class="control-btn left-btn" @mousedown="startLeft" @mouseup="stopLeft" @touchstart="startLeft" @touchend="stopLeft">⬅️</button>
+    <button class="control-btn right-btn" @mousedown="startRight" @mouseup="stopRight" @touchstart="startRight" @touchend="stopRight">➡️</button>
+
     <canvas ref="gameCanvas" width="300" height="500"></canvas>
+
     <p v-if="gameOver" class="game-over">💥 游戏结束！得分：{{ score }}</p>
+    <p class="high-score">🎯 历史最高分：{{ highScore }}</p>
+    <p class="high-score">QQ:33521189 关注Karmen~喵~~</p>
   </div>
 </template>
 
@@ -15,7 +22,7 @@ const ctx = ref(null)
 const ball = {
   x: 150,
   y: 450,
-  radius: 10,
+  radius: 12,
   color: '#0095DD'
 }
 
@@ -23,8 +30,7 @@ const ball = {
 let leftPressed = false
 let rightPressed = false
 
-// 触摸开始位置
-let startX = 0
+
 
 // 障碍物数组
 const obstacles = []
@@ -34,6 +40,10 @@ const obstacleHeight = 30
 // 游戏状态
 const gameOver = ref(false)
 const score = ref(0)
+const highScore = ref(0)
+
+// 初始化最高分
+highScore.value = Number(localStorage.getItem('sandBallHighScore')) || 0
 
 // 创建新障碍物
 function createObstacle() {
@@ -91,7 +101,14 @@ function update() {
     // 碰撞检测
     if (checkCollision(ball, obs)) {
       gameOver.value = true
-      alert('💥 游戏结束！得分：' + score.value)
+
+      // 判断是否刷新了最高分
+      if (score.value > highScore.value) {
+        localStorage.setItem('sandBallHighScore', score.value)
+        highScore.value = score.value
+      }
+
+      alert(`💥 游戏结束！得分：${score.value}\n历史最高分：${highScore.value}`)
       location.reload()
     }
 
@@ -105,7 +122,7 @@ function update() {
   requestAnimationFrame(update)
 }
 
-// 键盘事件监听
+// 键盘事件监听（桌面兼容）
 function keyDownHandler(e) {
   if (e.key === 'ArrowLeft') leftPressed = true
   if (e.key === 'ArrowRight') rightPressed = true
@@ -116,26 +133,25 @@ function keyUpHandler(e) {
   if (e.key === 'ArrowRight') rightPressed = false
 }
 
-// 触摸事件处理
-function handleTouchStart(event) {
-  startX = event.touches[0].clientX
+// 控制按钮按下/释放事件
+function startLeft() {
+  leftPressed = true
 }
-
-function handleTouchMove(event) {
-  const moveX = event.touches[0].clientX
-  if (moveX > startX + 30 && ball.x < 300) {
-    ball.x += 25 // 向右移动
-  } else if (moveX < startX - 30 && ball.x > 0) {
-    ball.x -= 25 // 向左移动
-  }
-  startX = moveX
+function stopLeft() {
+  leftPressed = false
+}
+function startRight() {
+  rightPressed = true
+}
+function stopRight() {
+  rightPressed = false
 }
 
 onMounted(() => {
   ctx.value = gameCanvas.value.getContext('2d')
 
   // 每隔一段时间创建一个障碍物
-  setInterval(createObstacle, 500)
+  setInterval(createObstacle, 400)
 
   // 启动游戏循环
   update()
@@ -148,21 +164,50 @@ onMounted(() => {
 
 <style scoped>
 .game-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  touch-action: none; /* 禁止默认的触摸行为 */
+  height: 100vh;
+  weight: 100vw;
 }
 
 canvas {
   background-color: #f0f0f0;
   border: 2px solid #333;
+  z-index: 1;
+}
+
+.control-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  font-size: 36px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+  padding: 20px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.left-btn {
+  left:10px;
+}
+
+.right-btn {
+  right: 10px;
 }
 
 .game-over {
   font-size: 18px;
   color: red;
   margin-top: 10px;
+}
+
+.high-score {
+  margin-top: 10px;
+  font-weight: bold;
+  color: green;
 }
 </style>
