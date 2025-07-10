@@ -19,11 +19,7 @@
       <h2>本工作室的愿景<span style="color: red">&#10084;</span></h2>
       <p>以技术为基石，以用户体验为核心，助力企业实现数字化转型，让科技点亮未来。</p>
 
-      <h2>作品链接</h2>
-      <p><a href="http://xingchengnet.online:90">星辰购物网</a></p>
-      <p><a href="http://xingchengnet.online:426">躲避小游戏</a></p>
-      <p><a href="http://xingchengnet.online:100">KSDN论坛</a></p>
-
+      <h2>联系我们</h2>
       <div class="contact">
         <p>📧 邮箱：karmenluious@gmail.com</p>
         <p>📞 电话：+86 166-7087-0515</p>

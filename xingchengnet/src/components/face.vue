@@ -1,6 +1,6 @@
 <template>
   <section class="welcome">
-    <header class="title">欢迎来到 星辰网络工作室</header>
+    <header class="title">欢迎体验 星辰网络工作室</header>
     <article class="subtitle">技术进步 · 开源学习 · 极客精神</article>
     <button @click="a" class="enter">立即进入</button>
   </section>
