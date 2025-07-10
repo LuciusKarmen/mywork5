@@ -4,4 +4,6 @@
   </div>
 </template>
 <script lang="ts" setup name="App"></script>
-<style lang="scss" scoped></style>
+<style lang="scss">
+@use './styles/common/index.scss';
+</style>

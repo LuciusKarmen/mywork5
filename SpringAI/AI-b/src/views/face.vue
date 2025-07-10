@@ -9,7 +9,7 @@
 <script setup lang="ts" name="face">
 import r from '../router/index'
 const a = () => {
-  r.push('/our')
+  r.push('/main')
 }
 </script>
 
@@ -34,7 +34,7 @@ const a = () => {
   font-weight: 800;
   letter-spacing: 2px;
   margin-bottom: 1rem;
-  background: linear-gradient(to right, #00c9ff, #92fe9d);
+  background: linear-gradient(to right, #00c9ff, #d7c53f);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: floatUp 2s ease-out forwards;
