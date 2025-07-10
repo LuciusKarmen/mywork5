@@ -1,14 +1,14 @@
 <template>
   <section class="welcome">
-    <header class="title">欢迎来到 星辰网络工作室</header>
-    <article class="subtitle">技术进步 · 开源学习 · 极客精神</article>
+    <header class="title">欢迎体验 星辰认知大模型</header>
+    <article class="subtitle">人工智能 · 行业前沿 · 极客精神</article>
     <button @click="a" class="enter">立即进入</button>
   </section>
 </template>
 
 <script setup lang="ts" name="face">
 import r from '../router/index'
-const a=()=>{
+const a = () => {
   r.push('/our')
 }
 </script>
@@ -17,7 +17,7 @@ const a=()=>{
 .welcome {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(135deg, #00c9ff, #92fe9d, #00c9ff, #92fe9d);
   background-size: 400% 400%;
   display: flex;
   flex-direction: column;
