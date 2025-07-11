@@ -9,9 +9,21 @@
       <div class="title" @click="go">关于我们</div>
     </div>
     <div class="main">
-      <div class="content">{{ response }}</div>
+      <div class="content">
+        <div
+          v-for="(item, index) in chatHistory"
+          :key="index"
+          :class="['message', item.isUser ? 'user-message' : 'ai-message']"
+        >
+          <div class="bubble">{{ item.text }}</div>
+          <div class="timestamp">{{ item.time }}</div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
       <div class="question">
-        <input type="text" placeholder="请输入问题" v-model="prompt" />
+        <input type="text" placeholder="请输入问题" v-model="prompt" @keyup.enter="sendPrompt" />
         <button @click="sendPrompt">提交</button>
       </div>
     </div>
@@ -23,30 +35,64 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 
-const prompt = ref('')
-const response = ref('')
 const router = useRouter()
+const prompt = ref('')
+const chatHistory = ref([
+  {
+    text: '你好！我是光明模型助手，有什么我可以帮你的吗？',
+    isUser: false,
+    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+  },
+])
+
 const go = () => {
   router.push('/our')
 }
 
 const sendPrompt = async () => {
-  await axios
-    .get('/api/ai/chat', {
+  const userText = prompt.value.trim()
+  if (!userText) return
+
+  const userMessage = {
+    text: userText,
+    isUser: true,
+    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+  }
+  chatHistory.value.push(userMessage)
+  prompt.value = ''
+
+  try {
+    const res = await axios.get('/api/ai/chat', {
       params: {
-        prompt: prompt.value,
+        prompt: userText,
       },
     })
-    .then((res) => {
-      response.value = res.data
-      console.log(res)
-      prompt.value = ''
+
+    const aiMessage = {
+      text: res.data || '抱歉，我没有收到有效的回答。',
+      isUser: false,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    }
+
+    chatHistory.value.push(aiMessage)
+
+    setTimeout(() => {
+      const content = document.querySelector('.content')
+      if (content) {
+        content.scrollTop = content.scrollHeight
+      }
+    }, 100)
+  } catch (err) {
+    console.error(err)
+    chatHistory.value.push({
+      text: '网络错误，请稍后再试。',
+      isUser: false,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     })
-    .catch((err) => {
-      console.log(err)
-    })
+  }
 }
 </script>
+
 <style lang="scss" scoped>
 .main-container {
   width: 100vw;
@@ -55,10 +101,11 @@ const sendPrompt = async () => {
   flex-direction: column;
   background-color: #f8f9fa;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
   .top {
     width: 100%;
-    height: 5vh;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    height: 7vh;
+    background-color: rgba(#ed7ac8, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,6 +120,7 @@ const sendPrompt = async () => {
       -webkit-text-fill-color: transparent;
     }
   }
+
   .left {
     width: 20%;
     height: 95vh;
@@ -98,31 +146,14 @@ const sendPrompt = async () => {
       border-radius: 8px;
       margin-bottom: 0.5rem;
       transition: all 0.2s ease;
-      position: relative;
 
       &:hover {
         background-color: #f0f0f0;
         color: #00c9ff;
       }
-
-      &.active {
-        background-color: #00c9ff;
-        color: white;
-        font-weight: bold;
-
-        &::after {
-          content: '';
-          position: absolute;
-          right: 0;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 4px;
-          height: 60%;
-          background-color: #ff3083;
-        }
-      }
     }
   }
+
   .main {
     width: 80%;
     height: 95vh;
@@ -134,24 +165,60 @@ const sendPrompt = async () => {
 
     .content {
       flex: 1;
-      padding: 1.5rem;
+      padding: 1rem;
       overflow-y: auto;
-      background-color: #ffffff;
+      background-color: #f1f5f9;
       border-radius: 8px;
       margin: 1rem;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      font-size: 1rem;
-      color: #333;
-      line-height: 1.6;
-      white-space: pre-wrap; // 保留换行符
-      word-wrap: break-word;
+      display: flex;
+      flex-direction: column;
 
-      &:empty::before {
-        content: attr(placeholder);
-        color: #aaa;
-        font-style: italic;
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .message {
+        margin: 0.5rem 0;
+        display: flex;
+        flex-direction: column;
+
+        &.user-message {
+          align-items: flex-end;
+          .bubble {
+            background-color: #ff3083;
+            color: white;
+          }
+        }
+
+        &.ai-message {
+          align-items: flex-start;
+          .bubble {
+            background-color: #ffffff;
+            color: #333;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+          }
+        }
+
+        .bubble {
+          max-width: 70%;
+          padding: 0.75rem 1rem;
+          border-radius: 16px;
+          font-size: 1rem;
+          line-height: 1.5;
+          word-wrap: break-word;
+        }
+
+        .timestamp {
+          font-size: 0.75rem;
+          color: #999;
+          margin-top: 4px;
+          margin-left: 8px;
+        }
       }
     }
+
     .question {
       background: #f9f9f9;
       width: 100%;
