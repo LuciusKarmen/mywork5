@@ -58,8 +58,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss">
-@use './style/common/index.scss';
+<style lang="scss" scoped>
 .chart {
   width: 100%;
   height: 400px;
