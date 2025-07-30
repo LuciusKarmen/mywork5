@@ -19,17 +19,21 @@
       <h2>本工作室的愿景<span style="color: red">&#10084;</span></h2>
       <p>以技术为基石，以用户体验为核心，助力企业实现数字化转型，让科技点亮未来。</p>
 
-      <h2>作品链接</h2>
-      <p><a href="http://xingchengnet.online:90">星辰购物网</a></p>
-      <p><a href="http://xingchengnet.online:426">躲避小游戏</a></p>
-      <p><a href="http://xingchengnet.online:100">KSDN论坛</a></p>
+      <h2>作品展示</h2>
+      <p>星辰购物网</p>
+      <p>KK通信</p>
+      <p>躲避游戏</p>
+      <p>KSDN论坛</p>
+      <p>星辰壁纸小程序</p>
+      <p>星辰认知大模型</p>
 
 
       <div class="contact">
         <p>📧 邮箱：karmenluious@gmail.com</p>
-        <p>📞 电话：+86 166-7087-0515</p>
+        <p>📞 电话：+86 183-2918-3547</p>
         <p>📍 地址：中国 · 杭州市西湖区</p>
       </div>
+      
     </div>
   </div>
 </template>

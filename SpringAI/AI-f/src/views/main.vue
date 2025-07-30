@@ -69,7 +69,7 @@ const sendPrompt = async () => {
     })
 
     const aiMessage = {
-      text: res.data.slice(15) || '抱歉，我没有收到有效的回答。',
+      text: res.data.slice(17) || '抱歉，我没有收到有效的回答。',
       isUser: false,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     }
