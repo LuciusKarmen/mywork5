@@ -9,19 +9,20 @@ const router = createRouter({
       component: () => import('../views/start.vue'),
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/login.vue'),
+      path: '/1',
+      name: '11111',
+      component: () => import('../views/style.vue'),
     },
     {
-      path: '/reg',
-      name: 'reg',
-      component: () => import('../views/reg.vue'),
+      path: '/2',
+      name: '22222',
+      component: () => import('../views/pie.vue'),
     },
     {
-      path: '/our',
-      name: 'our',
-      component: () => import('../views/our.vue'),
+      path: '/3',
+      name: '33333',
+      component: () => import('../views/map.vue'),
     },
   ],
 })
+export default router

@@ -21,9 +21,12 @@
 
       <h2>作品展示</h2>
       <p>星辰购物网</p>
-      <p>KK通信</p>
-      <p>躲避游戏</p>
-      <p>KSDN论坛</p>
+      <p>KK通信<a href="http://www.xingchengnet.online:8900/">    http://www.xingchengnet.online:8900</a></p>
+      <p>躲避游戏<a href="http://www.xingchengnet.online:426/">    http://www.xingchengnet.online:426</a></p>
+      <p>星辰论坛<a href="http://www.xingchengnet.online:8810/">    http://www.xingchengnet.online:8810</a></p>
+      <p>星辰视频网<a href="http://www.xingchengnet.online:5280/">    http://www.xingchengnet.online:5280</a></p>
+      <p>wiki星辰<a href="http://www.xingchengnet.online:7777/">    http://www.xingchengnet.online:7777</a></p>
+      <p>星辰企业管理系统<a href="http://www.xingchengnet.online:9999/">    http://www.xingchengnet.online:9999</a></p>
       <p>星辰壁纸小程序</p>
       <p>星辰认知大模型</p>
 
@@ -33,12 +36,16 @@
         <p>📞 电话：+86 183-2918-3547</p>
         <p>📍 地址：中国 · 杭州市西湖区</p>
       </div>
-      
+      <cpmpy></cpmpy>
+
     </div>
   </div>
 </template>
 
-<script setup name="our"></script>
+<script setup name="our">
+import cpmpy from "../components/compony.vue"
+
+</script>
 
 <style scoped lang="scss">
 .about-container {
